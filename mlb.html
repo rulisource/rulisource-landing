@@ -23,8 +23,6 @@
   <main class="main">
     <section class="intro">
       <h2>MLB Insights, Stats & Picks</h2>
-      <p>Aquí podrás trabajar tus análisis, comparativas, picks y datos para apuestas MLB.</p>
-      <button onclick="alert('Aquí irá tu herramienta de análisis')">Cargar Estadísticas</button>
     </section>
   </main>
 
@@ -32,17 +30,108 @@
     <p>&copy; 2025 RuliSource. All rights reserved.</p>
   </footer>
 
-  <section class="mlb-table">
-    <h2>📊 TOP HITTERS</h2>
-    <div class="google-sheet-container">
-      <iframe 
-  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vREulzi0RIE8hsE8GFb5F4-j1amwpJ9BZfQq6JdfUxlz5-13pp1prSQo2jnDSpq1C4ZQKssQ7J4moyh/pubhtml?gid=1653485759&single=true" 
-  width="1000" 
-  height="420" 
-  frameborder="0" 
-  style="display: block; margin: 0 auto; border-radius: 8px; border: 2px solid #BFA046;">
-</iframe>
-  </section>
+  <!-- Tabletop + MLB Data Table Script -->
+<script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', init);
+
+  function init() {
+    Tabletop.init({
+      key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vREulzi0RIE8hsE8GFb5F4-j1amwpJ9BZfQq6JdfUxlz5-13pp1prSQo2jnDSpq1C4ZQKssQ7J4moyh/pub?gid=1653485759&single=true&output=csv',
+      simpleSheet: true,
+      callback: function(data) {
+        buildTable(data);
+      }
+    });
+  }
+
+  function buildTable(data) {
+    const table = document.createElement('table');
+    table.className = 'styled-table';
+
+    // Encabezados
+    const header = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    Object.keys(data[0]).forEach(key => {
+      const th = document.createElement('th');
+      th.textContent = key;
+      headerRow.appendChild(th);
+    });
+    header.appendChild(headerRow);
+    table.appendChild(header);
+
+    // Cuerpo
+    const tbody = document.createElement('tbody');
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      Object.keys(row).forEach(key => {
+        const td = document.createElement('td');
+        td.textContent = row[key];
+
+        // Color dinámico para columnas numéricas
+        if (["EV", "Hard Hit%", "xwOBA", "xSLG"].includes(key)) {
+          const value = parseFloat(row[key]);
+          if (!isNaN(value)) {
+            td.style.backgroundColor = value >= 50 ? '#B22222' : value >= 40 ? '#8B0000' : 'transparent';
+            td.style.color = '#fff';
+          }
+        }
+        if (["K%", "BB%"].includes(key)) {
+          const value = parseFloat(row[key]);
+          if (!isNaN(value)) {
+            td.style.backgroundColor = value <= 10 ? '#003366' : value <= 15 ? '#1E90FF' : 'transparent';
+            td.style.color = '#fff';
+          }
+        }
+
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    document.getElementById('mlb-data').appendChild(table);
+  }
+</script>
+
+<!-- Contenedor en tu HTML donde irá la tabla -->
+<section class="mlb-table">
+  <h2>📊 TOP HITTERS</h2>
+  <div id="mlb-data"></div>
+</section>
+
+<style>
+  #mlb-data {
+    overflow-x: auto;
+    margin: 30px auto;
+    max-width: 1000px;
+  }
+
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    border: 1px solid #BFA046;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .styled-table th {
+    background-color: #BFA046;
+    color: #121212;
+    padding: 10px;
+  }
+
+  .styled-table td {
+    background-color: #1a1a1a;
+    padding: 10px;
+    color: #E0E0E0;
+    text-align: center;
+  }
+
+  .styled-table tr:nth-child(even) td {
+    background-color: #1f1f1f;
+  }
+</style>
   
 </body>
 </html>
