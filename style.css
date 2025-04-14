@@ -10,7 +10,7 @@ body {
   background-color: #121212;
   padding: 20px;
   text-align: center;
-  border-bottom: 2px solid #C9B037;
+  border-bottom: 2px solid #BFA046;
 }
 
 .logo {
@@ -20,7 +20,7 @@ body {
 }
 
 h1 {
-  color: #C9B037;
+  color: #BFA046;
   margin: 0;
   font-size: 2rem;
 }
@@ -31,7 +31,7 @@ h1 {
 }
 
 .intro h2 {
-  color: #C9B037;
+  color: #BFA046;
   font-size: 1.8rem;
 }
 
@@ -48,7 +48,7 @@ h1 {
 }
 
 button {
-  background-color: #C9B037;
+  background-color: #BFA046;
   color: #121212;
   padding: 12px 24px;
   font-size: 1rem;
@@ -59,7 +59,7 @@ button {
 }
 
 button:hover {
-  background-color: #FFD700;
+  background-color: #BFA046;
 }
 
 .footer {
