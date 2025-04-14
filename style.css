@@ -252,3 +252,35 @@ td {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
+<style>
+  #mlb-data {
+    overflow-x: auto;
+    margin: 30px auto;
+    max-width: 1000px;
+  }
+
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    border: 1px solid #BFA046;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .styled-table th {
+    background-color: #BFA046;
+    color: #121212;
+    padding: 10px;
+  }
+
+  .styled-table td {
+    background-color: #1a1a1a;
+    padding: 10px;
+    color: #E0E0E0;
+    text-align: center;
+  }
+
+  .styled-table tr:nth-child(even) td {
+    background-color: #1f1f1f;
+  }
+</style>
