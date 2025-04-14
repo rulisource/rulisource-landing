@@ -179,3 +179,25 @@ button:hover {
   font-size: 1.1rem;
   vertical-align: middle;
 }
+table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #BFA046;
+}
+
+th {
+  background-color: #BFA046;
+  color: #121212;
+}
+
+td {
+  background-color: #1E1E1E;
+  color: #E0E0E0;
+}
