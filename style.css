@@ -95,3 +95,51 @@ button:hover {
   border-top: 1px solid #333;
   margin-top: 40px;
 }
+/* ----------------------------- */
+/* 🌐 DISEÑO RESPONSIVE MÓVIL 📱 */
+/* ----------------------------- */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar a {
+    font-size: 1rem;
+  }
+
+  .main {
+    padding: 30px 15px;
+  }
+
+  .intro h2 {
+    font-size: 1.4rem;
+  }
+
+  .intro p {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+  }
+
+  .footer {
+    font-size: 0.9rem;
+    padding: 15px;
+  }
+}
