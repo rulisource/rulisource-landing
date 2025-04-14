@@ -201,3 +201,44 @@ td {
   background-color: #1E1E1E;
   color: #E0E0E0;
 }
+.table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+table {
+  width: 90%;
+  max-width: 800px;
+  border-collapse: collapse;
+  border: 1px solid #BFA046;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+th, td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+}
+
+th {
+  background-color: #BFA046;
+  color: #121212;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #1E1E1E;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #151515;
+}
+
+td {
+  color: #E0E0E0;
+}
