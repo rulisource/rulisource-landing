@@ -6,6 +6,50 @@
   <title>RuliSource - MLB</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+<script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', init);
+
+  function init() {
+    Tabletop.init({
+      key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vREulzi0RIE8hsE8GFb5F4-j1amwpJ9BZfQq6JdfUxlz5-13pp1prSQo2jnDSpq1C4ZQKssQ7J4moyh/pub?gid=1653485759&single=true&output=csv',
+      simpleSheet: true,
+      callback: function(data) {
+        buildTable(data);
+      }
+    });
+  }
+
+  function buildTable(data) {
+    const table = document.createElement('table');
+    table.className = 'styled-table';
+
+    const header = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    Object.keys(data[0]).forEach(key => {
+      const th = document.createElement('th');
+      th.textContent = key;
+      headerRow.appendChild(th);
+    });
+    header.appendChild(headerRow);
+    table.appendChild(header);
+
+    const tbody = document.createElement('tbody');
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      Object.keys(row).forEach(key => {
+        const td = document.createElement('td');
+        td.textContent = row[key];
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    document.getElementById('mlb-data').appendChild(table);
+  }
+</script>
+
 <body>
   <header class="header">
     <img src="RS_logo_64x64_black_bg.png" alt="RuliSource Logo" class="logo" />
