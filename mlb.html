@@ -24,79 +24,79 @@
     <section class="intro">
       <h2>MLB Insights, Stats & Picks</h2>
     </section>
+
+    <section class="mlb-table">
+      <h2>📊 TOP HITTERS</h2>
+      <div id="mlb-data"></div>
+    </section>
   </main>
 
-  <section class="mlb-table">
-                            <h2>📊 TOP HITTERS</h2>
-<div id="mlb-data"></div>
-</section>
-
   <!-- Tabletop + MLB Data Table Script -->
-<script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', init);
+  <script src="https://unpkg.com/tabletop@1.6.0/tabletop.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', init);
 
-  function init() {
-    Tabletop.init({
-      key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vREulzi0RIE8hsE8GFb5F4-j1amwpJ9BZfQq6JdfUxlz5-13pp1prSQo2jnDSpq1C4ZQKssQ7J4moyh/pub?gid=1653485759&single=true&output=csv',
-      simpleSheet: true,
-      callback: function(data) {
-        buildTable(data);
-      }
-    });
-  }
-
-  function buildTable(data) {
-    const table = document.createElement('table');
-    table.className = 'styled-table';
-
-    // Encabezados
-    const header = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    Object.keys(data[0]).forEach(key => {
-      const th = document.createElement('th');
-      th.textContent = key;
-      headerRow.appendChild(th);
-    });
-    header.appendChild(headerRow);
-    table.appendChild(header);
-
-    // Cuerpo
-    const tbody = document.createElement('tbody');
-    data.forEach(row => {
-      const tr = document.createElement('tr');
-      Object.keys(row).forEach(key => {
-        const td = document.createElement('td');
-        td.textContent = row[key];
-
-        // Color dinámico para columnas numéricas
-        if (["EV", "Hard Hit%", "xwOBA", "xSLG"].includes(key)) {
-          const value = parseFloat(row[key]);
-          if (!isNaN(value)) {
-            td.style.backgroundColor = value >= 50 ? '#B22222' : value >= 40 ? '#8B0000' : 'transparent';
-            td.style.color = '#fff';
-          }
+    function init() {
+      Tabletop.init({
+        key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vREulzi0RIE8hsE8GFb5F4-j1amwpJ9BZfQq6JdfUxlz5-13pp1prSQo2jnDSpq1C4ZQKssQ7J4moyh/pub?gid=1653485759&single=true&output=csv',
+        simpleSheet: true,
+        callback: function(data) {
+          buildTable(data);
         }
-        if (["K%", "BB%"].includes(key)) {
-          const value = parseFloat(row[key]);
-          if (!isNaN(value)) {
-            td.style.backgroundColor = value <= 10 ? '#003366' : value <= 15 ? '#1E90FF' : 'transparent';
-            td.style.color = '#fff';
-          }
-        }
-
-        tr.appendChild(td);
       });
-      tbody.appendChild(tr);
-    });
+    }
 
-    table.appendChild(tbody);
-    document.getElementById('mlb-data').appendChild(table);
-  }
-</script>
+    function buildTable(data) {
+      const table = document.createElement('table');
+      table.className = 'styled-table';
 
-<footer class="footer">
-  <p>&copy; 2025 RuliSource. All rights reserved.</p>
-</footer>
+      // Encabezados
+      const header = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      Object.keys(data[0]).forEach(key => {
+        const th = document.createElement('th');
+        th.textContent = key;
+        headerRow.appendChild(th);
+      });
+      header.appendChild(headerRow);
+      table.appendChild(header);
+
+      // Cuerpo
+      const tbody = document.createElement('tbody');
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        Object.keys(row).forEach(key => {
+          const td = document.createElement('td');
+          td.textContent = row[key];
+
+          // Color dinámico para columnas numéricas
+          if (["EV", "Hard Hit%", "xwOBA", "xSLG"].includes(key)) {
+            const value = parseFloat(row[key]);
+            if (!isNaN(value)) {
+              td.style.backgroundColor = value >= 50 ? '#B22222' : value >= 40 ? '#8B0000' : 'transparent';
+              td.style.color = '#fff';
+            }
+          }
+          if (["K%", "BB%"].includes(key)) {
+            const value = parseFloat(row[key]);
+            if (!isNaN(value)) {
+              td.style.backgroundColor = value <= 10 ? '#003366' : value <= 15 ? '#1E90FF' : 'transparent';
+              td.style.color = '#fff';
+            }
+          }
+
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+      document.getElementById('mlb-data').appendChild(table);
+    }
+  </script>
+
+  <footer class="footer">
+    <p>&copy; 2025 RuliSource. All rights reserved.</p>
+  </footer>
 </body>
 </html>
