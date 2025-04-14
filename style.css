@@ -242,3 +242,12 @@ tbody tr:nth-child(odd) {
 td {
   color: #E0E0E0;
 }
+.google-sheet-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 2px solid #BFA046;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
